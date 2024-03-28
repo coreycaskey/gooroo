@@ -23,13 +23,13 @@
     "eject": "react-scripts eject",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "lint:noWarnings": "eslint --fix . --max-warnings=0",
+    "lint:noWarnings": "",
     "prepare": "husky"
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "npm run test:noWatch"
+      "pre-push": "react-scripts test -- --watchAll=false"
     }
   },
   "lint-staged": {
@@ -37,7 +37,7 @@
       "prettier --write"
     ],
     "src/**/*.{js,ts,jsx,tsx}": [
-      "npm run lint:noWarnings"
+      "eslint --fix . --max-warnings=0"
     ]
   },
   "browserslist": {
