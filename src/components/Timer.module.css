@@ -1,0 +1,45 @@
+.timer-container {
+  height: 400px;
+  width: 400px;
+  position: relative;
+  text-align: center;
+}
+
+.timer-number {
+  display: inline-block;
+  font-size: 100px;
+}
+
+.timer-input {
+  display: inline;
+  font-size: 50px;
+  border: none;
+}
+
+svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  transform: rotateY(-180deg) rotateZ(-90deg);
+}
+
+svg circle {
+  stroke-dasharray: 113px;
+  stroke-dashoffset: 0px;
+  stroke-linecap: round;
+  stroke-width: 2px;
+  stroke: black;
+  fill: none;
+  animation: countdown 10s linear forwards;
+}
+
+@keyframes countdown {
+  from {
+    stroke-dashoffset: 0px;
+  }
+  to {
+    stroke-dashoffset: 113px;
+  }
+}
