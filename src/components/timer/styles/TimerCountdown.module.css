@@ -1,19 +1,12 @@
-.timer-container {
+.timer-countdown-container {
   height: 400px;
   width: 400px;
   position: relative;
   text-align: center;
-}
-
-.timer-number {
-  display: inline-block;
-  font-size: 100px;
-}
-
-.timer-input {
-  display: inline;
+  display: flex;
+  align-items: center;
+  gap: 4px;
   font-size: 50px;
-  border: none;
 }
 
 svg {

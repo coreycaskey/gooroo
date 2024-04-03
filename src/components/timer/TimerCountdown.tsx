@@ -1,17 +1,24 @@
 import { Dispatch, SetStateAction } from 'react';
+import { useTimerCountdown } from './hooks/useTimerCountdown';
 import { TimerInput } from './TimerInput';
-import { TimerValue } from '../types/timer';
+import { TimerState, TimerValue } from './types';
 
-import styles from './Timer.module.css';
+import styles from './styles/TimerCountdown.module.css';
 
-interface TimerProps {
+interface TimerCountdownProps {
   timerValue: TimerValue;
   setTimerValue: Dispatch<SetStateAction<TimerValue>>;
+  timerState: TimerState;
+  setTimerState: Dispatch<SetStateAction<TimerState>>;
 }
 
-export const Timer: React.FC<TimerProps> = ({ timerValue, setTimerValue }) => {
+export const TimerCountdown: React.FC<TimerCountdownProps> = (props) => {
+  const { timerValue, setTimerValue, timerState } = props;
+
+  useTimerCountdown(props);
+
   return (
-    <div className={styles['timer-container']}>
+    <div className={styles['timer-countdown-container']}>
       <div
         style={{
           display: 'flex',
@@ -22,20 +29,23 @@ export const Timer: React.FC<TimerProps> = ({ timerValue, setTimerValue }) => {
       >
         <TimerInput
           timerValue={timerValue}
+          setTimerValue={setTimerValue}
           timerValueKey="hours"
-          setTimerValue={setTimerValue}
+          timerState={timerState}
         />
         :
         <TimerInput
           timerValue={timerValue}
+          setTimerValue={setTimerValue}
           timerValueKey="minutes"
-          setTimerValue={setTimerValue}
+          timerState={timerState}
         />
         :
         <TimerInput
           timerValue={timerValue}
-          timerValueKey="seconds"
           setTimerValue={setTimerValue}
+          timerValueKey="seconds"
+          timerState={timerState}
         />
       </div>
 

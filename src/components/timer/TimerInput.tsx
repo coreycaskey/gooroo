@@ -1,22 +1,23 @@
 import { Dispatch, SetStateAction } from 'react';
-import { TimerValue, TimerValueKey } from '../types/timer';
-import { capitalize } from '../utils/capitalize';
+import { MAX_SECONDS_AND_MINUTES, MAX_TIME_UNIT_LENGTH } from './constants';
+import { TimerState, TimerValue, TimerValueKey } from './types';
+import { addZeroPadding } from './helpers/addZeroPadding';
+import { capitalize } from '../../utils/capitalize';
 
-import styles from './Timer.module.css';
-
-export const MAX_STR_LENGTH = 2;
-export const MAX_SECONDS_AND_MINUTES = 60;
+import styles from './styles/TimerInput.module.css';
 
 interface TimerInputProps {
   timerValue: TimerValue;
-  timerValueKey: TimerValueKey;
   setTimerValue: Dispatch<SetStateAction<TimerValue>>;
+  timerValueKey: TimerValueKey;
+  timerState: TimerState;
 }
 
 export const TimerInput: React.FC<TimerInputProps> = ({
   timerValue,
   timerValueKey,
   setTimerValue,
+  timerState,
 }) => {
   const handleInputChange = (key: TimerValueKey, value: string) => {
     // prevent non-numeric values
@@ -25,7 +26,7 @@ export const TimerInput: React.FC<TimerInputProps> = ({
     }
 
     // cap string length
-    if (value.length > MAX_STR_LENGTH) {
+    if (value.length > MAX_TIME_UNIT_LENGTH) {
       return;
     }
 
@@ -38,12 +39,12 @@ export const TimerInput: React.FC<TimerInputProps> = ({
   };
 
   const handleZeroPadding = (key: TimerValueKey, value: string) => {
-    const numPadding = MAX_STR_LENGTH - value.length;
+    const numPadding = MAX_TIME_UNIT_LENGTH - value.length;
 
     if (numPadding > 0) {
       setTimerValue({
         ...timerValue,
-        [key]: `${'0'.repeat(numPadding)}${value}`,
+        [key]: addZeroPadding(value, numPadding),
       });
     }
   };
@@ -61,6 +62,7 @@ export const TimerInput: React.FC<TimerInputProps> = ({
         value={timerValue[timerValueKey]}
         onChange={(e) => handleInputChange(timerValueKey, e.target.value)}
         onBlur={(e) => handleZeroPadding(timerValueKey, e.target.value)}
+        disabled={timerState !== 'reset'}
       />
       <label htmlFor={timerValueKey}>{capitalize(timerValueKey)}</label>
     </div>

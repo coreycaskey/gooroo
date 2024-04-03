@@ -1,7 +1,7 @@
 import { axe } from 'jest-axe';
 import { render, screen } from '@testing-library/react';
-import { Timer } from '../Timer';
-import { TimerValue } from '../../types/timer';
+import { TimerValue } from 'components/Timer/types';
+import { TimerCountdown } from '../TimerCountdown';
 
 const MOCK_TIMER_VALUE: TimerValue = {
   hours: '01',
@@ -9,21 +9,35 @@ const MOCK_TIMER_VALUE: TimerValue = {
   seconds: '35',
 };
 
-describe('<Timer />', () => {
+// TODO: add more tests
+
+describe('<TimerCountdown />', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it('should have no violations', async () => {
     const { container } = render(
-      <Timer timerValue={MOCK_TIMER_VALUE} setTimerValue={() => {}} />
+      <TimerCountdown
+        timerValue={MOCK_TIMER_VALUE}
+        setTimerValue={() => {}}
+        timerState="reset"
+        setTimerState={() => {}}
+      />
     );
 
     expect(await axe(container)).toHaveNoViolations();
   });
 
-  it('should render <Timer />', () => {
-    render(<Timer timerValue={MOCK_TIMER_VALUE} setTimerValue={() => {}} />);
+  it('should render <TimerCountdown />', () => {
+    render(
+      <TimerCountdown
+        timerValue={MOCK_TIMER_VALUE}
+        setTimerValue={() => {}}
+        timerState="reset"
+        setTimerState={() => {}}
+      />
+    );
 
     expect(screen.getByText('Hours')).toBeInTheDocument();
     expect(screen.getByText('Minutes')).toBeInTheDocument();

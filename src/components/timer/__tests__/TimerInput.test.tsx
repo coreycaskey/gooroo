@@ -1,8 +1,8 @@
 import { axe } from 'jest-axe';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { TimerValue } from 'components/Timer/types';
 import { TimerInput } from '../TimerInput';
-import { TimerValue } from '../../types/timer';
 
 const MOCK_TIMER_VALUE: TimerValue = {
   hours: '01',
