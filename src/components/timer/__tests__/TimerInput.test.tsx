@@ -19,8 +19,9 @@ describe('<TimerInput />', () => {
     const { container } = render(
       <TimerInput
         timerValue={MOCK_TIMER_VALUE}
-        timerValueKey="hours"
         setTimerValue={() => {}}
+        timerValueKey="hours"
+        timerState="reset"
       />
     );
 
@@ -31,8 +32,9 @@ describe('<TimerInput />', () => {
     render(
       <TimerInput
         timerValue={MOCK_TIMER_VALUE}
-        timerValueKey="hours"
         setTimerValue={() => {}}
+        timerValueKey="hours"
+        timerState="reset"
       />
     );
 
@@ -48,8 +50,9 @@ describe('<TimerInput />', () => {
     render(
       <TimerInput
         timerValue={{ ...MOCK_TIMER_VALUE, hours: '' }}
-        timerValueKey="hours"
         setTimerValue={mockSetTimerValue}
+        timerValueKey="hours"
+        timerState="reset"
       />
     );
 
@@ -64,8 +67,9 @@ describe('<TimerInput />', () => {
     render(
       <TimerInput
         timerValue={MOCK_TIMER_VALUE}
-        timerValueKey="hours"
         setTimerValue={mockSetTimerValue}
+        timerValueKey="hours"
+        timerState="reset"
       />
     );
 
@@ -80,8 +84,9 @@ describe('<TimerInput />', () => {
     render(
       <TimerInput
         timerValue={{ ...MOCK_TIMER_VALUE, minutes: '6' }}
-        timerValueKey="minutes"
         setTimerValue={mockSetTimerValue}
+        timerValueKey="minutes"
+        timerState="reset"
       />
     );
 
@@ -96,8 +101,9 @@ describe('<TimerInput />', () => {
     render(
       <TimerInput
         timerValue={{ ...MOCK_TIMER_VALUE, seconds: '6' }}
-        timerValueKey="seconds"
         setTimerValue={mockSetTimerValue}
+        timerValueKey="seconds"
+        timerState="reset"
       />
     );
 
@@ -112,8 +118,9 @@ describe('<TimerInput />', () => {
     render(
       <TimerInput
         timerValue={{ ...MOCK_TIMER_VALUE, seconds: '' }}
-        timerValueKey="seconds"
         setTimerValue={mockSetTimerValue}
+        timerValueKey="seconds"
+        timerState="reset"
       />
     );
 
@@ -131,8 +138,9 @@ describe('<TimerInput />', () => {
     render(
       <TimerInput
         timerValue={{ ...MOCK_TIMER_VALUE, seconds: '5' }}
-        timerValueKey="seconds"
         setTimerValue={mockSetTimerValue}
+        timerValueKey="seconds"
+        timerState="reset"
       />
     );
 
@@ -154,8 +162,9 @@ describe('<TimerInput />', () => {
     render(
       <TimerInput
         timerValue={MOCK_TIMER_VALUE}
-        timerValueKey="seconds"
         setTimerValue={mockSetTimerValue}
+        timerValueKey="seconds"
+        timerState="reset"
       />
     );
 
