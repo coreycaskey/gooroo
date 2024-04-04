@@ -1,11 +1,10 @@
 /*
-  playing - timer has value and is counting down
+  started - timer has value and is counting down (also includes timer running out)
   paused - timer has value and is not counting down
-  reset - timer is reset
-  finished - timer has run out
+  reset - timer has been zeroed by user
 */
 
-export type TimerState = 'playing' | 'paused' | 'reset' | 'finished';
+export type TimerState = 'started' | 'paused' | 'reset';
 
 export type TimerValueKey = 'hours' | 'minutes' | 'seconds';
 

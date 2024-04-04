@@ -29,7 +29,8 @@
     ],
     "react/prop-types": [0],
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "warn"
+    "@typescript-eslint/no-unused-vars": "warn",
+    "testing-library/no-unnecessary-act": ["warn", { "isStrict": false }]
   },
   "overrides": [
     {

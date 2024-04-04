@@ -7,36 +7,34 @@ interface TimerCountdownProps {
   timerValue: TimerValue;
   setTimerValue: Dispatch<SetStateAction<TimerValue>>;
   timerState: TimerState;
-  setTimerState: Dispatch<SetStateAction<TimerState>>;
 }
 
 export const useTimerCountdown = ({
   timerValue,
   setTimerValue,
   timerState,
-  setTimerState,
 }: TimerCountdownProps) => {
-  const isTimerRunning = timerState === 'playing';
-  const isTimerFinished =
-    isTimerRunning && convertTimerValueToSeconds(timerValue) === 0;
+  const isTimerRunning =
+    timerState === 'started' && convertTimerValueToSeconds(timerValue) > 0;
 
   useEffect(() => {
-    const interval = isTimerRunning
-      ? setInterval(() => {
-          setTimerValue((prevTimerValue) =>
-            convertSecondsToTimerValue(
-              convertTimerValueToSeconds(prevTimerValue) - 1
-            )
-          );
-        }, 1000)
-      : undefined;
+    let interval: NodeJS.Timer | undefined;
+
+    /*
+      `convertSecondsToTimerValue()` ensures that any negative values
+      that may arise from `setInterval()` / rerender race conditions
+      will be defaulted to 0
+    */
+    if (isTimerRunning) {
+      interval = setInterval(() => {
+        setTimerValue((prevTimerValue) =>
+          convertSecondsToTimerValue(
+            convertTimerValueToSeconds(prevTimerValue) - 1
+          )
+        );
+      }, 1000);
+    }
 
     return () => clearInterval(interval);
   }, [isTimerRunning, setTimerValue]);
-
-  useEffect(() => {
-    if (isTimerFinished) {
-      setTimerState('finished');
-    }
-  }, [isTimerFinished, setTimerState]);
 };

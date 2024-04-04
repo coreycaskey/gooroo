@@ -17,9 +17,11 @@ export const Timer: React.FC<TimerProps> = () => {
   const [timerValue, setTimerValue] = useState<TimerValue>(INITIAL_TIMER_VALUE);
 
   const isInitialTimerValue = convertTimerValueToSeconds(timerValue) === 0;
-  const disableStartButton = timerState === 'playing' || isInitialTimerValue;
-  const disablePauseButton = timerState !== 'playing';
+  const disableStartButton = timerState === 'started' || isInitialTimerValue;
+  const disablePauseButton = timerState !== 'started';
   const disableResetButton = timerState === 'reset';
+
+  const isTimerFinished = timerState === 'started' && isInitialTimerValue;
 
   return (
     <div className={styles.container}>
@@ -34,14 +36,13 @@ export const Timer: React.FC<TimerProps> = () => {
             timerValue={timerValue}
             setTimerValue={setTimerValue}
             timerState={timerState}
-            setTimerState={setTimerState}
           />
 
-          {timerState === 'reset' && (
+          {timerState === 'reset' && isInitialTimerValue && (
             <p style={{ fontSize: '20px' }}>Please enter a time to start</p>
           )}
 
-          {timerState === 'finished' && (
+          {isTimerFinished && (
             <p style={{ fontSize: '20px' }}>
               Please reset the timer and enter a new time
             </p>
@@ -50,7 +51,7 @@ export const Timer: React.FC<TimerProps> = () => {
           <div className={styles['button-container']}>
             <StartButton
               disabled={disableStartButton}
-              onClick={() => setTimerState('playing')}
+              onClick={() => setTimerState('started')}
             />
 
             <PauseButton

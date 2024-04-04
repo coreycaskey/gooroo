@@ -9,10 +9,11 @@ import { TimerValue } from '../types';
 export const convertSecondsToTimerValue = (
   numericSeconds: number
 ): TimerValue => {
-  let carriedSeconds = numericSeconds;
+  // ensure negative values are converted to '00'
+  let carriedSeconds = numericSeconds >= 0 ? numericSeconds : 0;
 
   const stringifiedHours = Math.floor(
-    numericSeconds / SECONDS_IN_HOURS
+    carriedSeconds / SECONDS_IN_HOURS
   ).toString();
 
   carriedSeconds %= SECONDS_IN_HOURS;

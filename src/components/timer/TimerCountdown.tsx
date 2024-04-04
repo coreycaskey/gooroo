@@ -9,7 +9,6 @@ interface TimerCountdownProps {
   timerValue: TimerValue;
   setTimerValue: Dispatch<SetStateAction<TimerValue>>;
   timerState: TimerState;
-  setTimerState: Dispatch<SetStateAction<TimerState>>;
 }
 
 export const TimerCountdown: React.FC<TimerCountdownProps> = (props) => {
